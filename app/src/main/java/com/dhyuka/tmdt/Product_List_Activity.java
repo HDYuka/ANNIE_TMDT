@@ -44,65 +44,31 @@ public class Product_List_Activity extends AppCompatActivity {
         proLoading = (ProgressBar) findViewById(R.id.progress_loading);
         proLoading.setVisibility(View.VISIBLE);
 
-        DownLoadDataJSON d = new DownLoadDataJSON();
-        d.execute(url);
 
-        DownLoadDlJSON downLoadDlJSON = new DownLoadDlJSON();
+        DownLoadDataJSON dataJSON = new DownLoadDataJSON(new DownLoadDataJSON.AsyncResponse() {
+            @Override
+            public void processFinish(String output) {
+                loadListProduct(output);
+            }
+        });
+        dataJSON.execute(url);
 
-        downLoadDlJSON.execute(url);
     }
 
-    public class DownLoadDlJSON extends AsyncTask<String, Void, String> {
-        StringBuilder dulieu = new StringBuilder();
 
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                URL url = new URL(params[0]);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.connect();
+    private void loadListProduct(String s){
+        listProduct = new ArrayList<>();
 
-                InputStream inputStream = httpURLConnection.getInputStream();
-                InputStreamReader reader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(reader);
-
-                String dong = "";
-
-                while ((dong = bufferedReader.readLine()) != null) {
-                    dulieu.append(dong);
-                }
-
-                bufferedReader.close();
-                reader.close();
-                inputStream.close();
-                httpURLConnection.disconnect();
-
-                Log.d("du lieu: ", dulieu.toString());
-
-            } catch (MalformedURLException e) {
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return dulieu.toString();
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            listProduct = new ArrayList<>();
-
-            ParseDataJSON parseDataJSON = new ParseDataJSON(s);
-            listProduct = parseDataJSON.getListProduct();
+        ParseDataJSON parseDataJSON = new ParseDataJSON();
+        listProduct = parseDataJSON.getListProduct(s);
 
 
-            recyclerViewAdapter = new ProductListAdapter(getApplication(), listProduct);
-            recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerViewAdapter = new ProductListAdapter(getApplication(), listProduct);
+        recyclerView.setAdapter(recyclerViewAdapter);
 
-            if ( listProduct.size() >0){
-                proLoading.setVisibility(View.GONE);
-            }
+        if (listProduct.size() > 0) {
+            proLoading.setVisibility(View.GONE);
         }
     }
+
 }
