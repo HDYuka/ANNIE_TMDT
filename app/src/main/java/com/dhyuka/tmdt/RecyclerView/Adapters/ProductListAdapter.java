@@ -1,4 +1,4 @@
-package com.dhyuka.tmdt;
+package com.dhyuka.tmdt.RecyclerView.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dhyuka.tmdt.ProductDetails;
 import com.dhyuka.tmdt.R;
 import com.dhyuka.tmdt.models.Product;
 import com.squareup.picasso.Picasso;

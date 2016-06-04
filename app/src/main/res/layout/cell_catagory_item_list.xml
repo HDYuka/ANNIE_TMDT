@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/lnMenuItemClick"
+    android:paddingTop="5dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:textSize="20sp"
+        android:id="@+id/txtTitleItem"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <ImageView
+        android:background="@drawable/ic_keyboard_arrow_down"
+        android:id="@+id/imgCatalogItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:background="@color/cardview_shadow_start_color"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+</RelativeLayout>

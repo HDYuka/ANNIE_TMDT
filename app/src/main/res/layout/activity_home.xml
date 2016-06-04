@@ -6,18 +6,39 @@
     android:orientation="vertical"
     tools:context="com.dhyuka.tmdt.HomeActivity">
 
-
     <include
         android:id="@+id/toolbar"
         layout="@layout/layout_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></include>
 
-    <Button
-        android:id="@+id/btnListPro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Danh sach SP" />
+    <RelativeLayout
+        android:id="@+id/lnMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recylerview_catalog_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
+        <RelativeLayout
+            android:id="@+id/lnMenuItem"
+            android:background="@color/cardview_shadow_start_color"
+            android:layout_marginLeft="60dp"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:background="#eeeeee"
+                android:layout_marginLeft="1dp"
+                android:id="@+id/recylerview_catalog_menu_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 </LinearLayout>
