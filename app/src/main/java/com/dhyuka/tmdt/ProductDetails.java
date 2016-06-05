@@ -12,8 +12,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dhyuka.tmdt.RecyclerView.Adapters.CustomSwipeAdapter;
 import com.dhyuka.tmdt.json.DownLoadDataJSON;
 import com.dhyuka.tmdt.models.DesProduct;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDetails extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,6 +30,7 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
     RelativeLayout lnImage;
     DesProduct desProduct;
     Animation animSide;
+    List<String> imageResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,8 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
         lnDetail = (LinearLayout) findViewById(R.id.lnDetail);
         lnAddToCart = (LinearLayout) findViewById(R.id.lnAddToCart);
 
+        imageResource = new ArrayList<>();
+
         DownLoadDataJSON dataJSON = new DownLoadDataJSON(new DownLoadDataJSON.AsyncResponse() {
             @Override
             public void processFinish(String output) {
@@ -74,8 +81,17 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
 
         if (desProduct.getMaSP() != null) {
             progress_loading.setVisibility(View.GONE);
-            txtName.setText(desProduct.getMaSP() + "\n"
-                    + desProduct.getDsHinhAnh());
+//            txtName.setText(desProduct.getMaSP() + "\n"
+//                    + desProduct.getDsHinhAnh());
+
+            String input = desProduct.getDsHinhAnh();
+            String[] strArr = input.split("\n");
+            for (String a:strArr) {
+                imageResource.add(a);
+            }
+            Intent intent = new Intent(this, CustomSwipeAdapter.class);
+            intent.putExtra("data",desProduct.getDsHinhAnh());
+            startActivity(intent);
         }
     }
 
