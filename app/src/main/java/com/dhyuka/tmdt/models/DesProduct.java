@@ -4,14 +4,8 @@ package com.dhyuka.tmdt.models;
  * Created by DH Yuka on 6/2/2016.
  */
 public class DesProduct {
-    String MaSP;
 
-    String DsHinhAnh;
-
-    String ThongTinChiTiet;
-
-    String FullSize;
-
+    String MaSP,DsHinhAnh,ThongTinChiTiet,FullSize;
 
     public DesProduct(String maSP, String dsHinhAnh, String thongTinChiTiet, String fullSize) {
         this.MaSP = maSP;
