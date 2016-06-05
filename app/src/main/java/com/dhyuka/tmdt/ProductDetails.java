@@ -1,18 +1,26 @@
 package com.dhyuka.tmdt;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.dhyuka.tmdt.RecyclerView.Adapters.CustomSwipeAdapter;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.dhyuka.tmdt.RecyclerView.Adapters.MyViewPagerAdapter;
 import com.dhyuka.tmdt.json.DownLoadDataJSON;
 import com.dhyuka.tmdt.models.DesProduct;
 
@@ -30,7 +38,9 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
     RelativeLayout lnImage;
     DesProduct desProduct;
     Animation animSide;
+    ViewPager viewPager;
     List<String> imageResource;
+    MyViewPagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,7 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
         this.setTitle(name);
         progress_loading = (ProgressBar) findViewById(R.id.progress_loading);
         progress_loading.setVisibility(View.VISIBLE);
+
 
         txtDetail = (TextView) findViewById(R.id.txtDetail);
         txtName = (TextView) findViewById(R.id.txtName);
@@ -64,7 +75,7 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
         lnDetail = (LinearLayout) findViewById(R.id.lnDetail);
         lnAddToCart = (LinearLayout) findViewById(R.id.lnAddToCart);
 
-        imageResource = new ArrayList<>();
+        viewPager = (ViewPager) findViewById(R.id.view_pager_product_image);
 
         DownLoadDataJSON dataJSON = new DownLoadDataJSON(new DownLoadDataJSON.AsyncResponse() {
             @Override
@@ -83,15 +94,17 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
             progress_loading.setVisibility(View.GONE);
 //            txtName.setText(desProduct.getMaSP() + "\n"
 //                    + desProduct.getDsHinhAnh());
+            imageResource = new ArrayList<>();
 
             String input = desProduct.getDsHinhAnh();
             String[] strArr = input.split("\n");
             for (String a:strArr) {
                 imageResource.add(a);
             }
-            Intent intent = new Intent(this, CustomSwipeAdapter.class);
-            intent.putExtra("data",desProduct.getDsHinhAnh());
-            startActivity(intent);
+
+            pagerAdapter = new MyViewPagerAdapter();
+            pagerAdapter.addAll(imageResource);
+            viewPager.setAdapter(pagerAdapter);
         }
     }
 
