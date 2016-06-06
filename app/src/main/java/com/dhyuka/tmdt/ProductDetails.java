@@ -92,8 +92,7 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
 
         if (desProduct.getMaSP() != null) {
             progress_loading.setVisibility(View.GONE);
-//            txtName.setText(desProduct.getMaSP() + "\n"
-//                    + desProduct.getDsHinhAnh());
+            txtName.setText(desProduct.getMaSP());
             imageResource = new ArrayList<>();
 
             String input = desProduct.getDsHinhAnh();
@@ -102,8 +101,7 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
                 imageResource.add(a);
             }
 
-            pagerAdapter = new MyViewPagerAdapter();
-            pagerAdapter.addAll(imageResource);
+            pagerAdapter = new MyViewPagerAdapter(this,imageResource);
             viewPager.setAdapter(pagerAdapter);
         }
     }
