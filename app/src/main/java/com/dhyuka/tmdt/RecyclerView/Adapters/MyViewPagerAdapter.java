@@ -51,12 +51,6 @@ public class MyViewPagerAdapter extends PagerAdapter {
         return view;
     }
 
-
-//    public void addAll(List<String> items) {
-//        array_items = new ArrayList<>(items);
-//
-//    }
-
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
