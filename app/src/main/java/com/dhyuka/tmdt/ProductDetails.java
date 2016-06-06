@@ -102,8 +102,8 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
                 imageResource.add(a);
             }
 
-            pagerAdapter = new MyViewPagerAdapter();
-            pagerAdapter.addAll(imageResource);
+            pagerAdapter = new MyViewPagerAdapter(this,imageResource);
+//            pagerAdapter.addAll(imageResource);
             viewPager.setAdapter(pagerAdapter);
         }
     }

@@ -19,11 +19,13 @@ import java.util.List;
  */
 public class MyViewPagerAdapter extends PagerAdapter {
 
+    List<String> array_items;
+    Context context;
 
-    public MyViewPagerAdapter() {
+    public MyViewPagerAdapter(Context context, List<String> array_items) {
+        this.context = context;
+        this.array_items = array_items;
     }
-
-    private List<String> array_items = new ArrayList<>();
 
     @Override
     public int getCount() {
@@ -39,27 +41,21 @@ public class MyViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext())
                 .inflate(R.layout.item_image, container, false);
+
         ImageView imageViewPreview = (ImageView) view.findViewById(R.id.img_thumb);
 
-            for(int i=0;i<array_items.size();i++){
+        Glide.with(view.getContext()).load(array_items.get(position)).into(imageViewPreview);
 
-                Glide.with(view.getContext()).load(array_items.get(i))
-                        .thumbnail(0.5f)
-                        .crossFade()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(imageViewPreview);
-
-            }
         container.addView(view);
 
         return view;
     }
 
 
-    public void addAll(List<String> items) {
-        array_items = new ArrayList<>(items);
-
-    }
+//    public void addAll(List<String> items) {
+//        array_items = new ArrayList<>(items);
+//
+//    }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
