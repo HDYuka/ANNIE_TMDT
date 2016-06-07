@@ -35,7 +35,6 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
     ProgressBar progress_loading;
     Button btnOpenDetail, btnCloseDetail, btnOpenAddToCart, btnCloseAddToCart;
     LinearLayout lnDetail, lnAddToCart;
-    RelativeLayout lnImage;
     DesProduct desProduct;
     Animation animSide;
     ViewPager viewPager;
@@ -71,7 +70,6 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
         btnOpenDetail.setOnClickListener(this);
         btnOpenAddToCart.setOnClickListener(this);
 
-        lnImage = (RelativeLayout) findViewById(R.id.lnImage);
         lnDetail = (LinearLayout) findViewById(R.id.lnDetail);
         lnAddToCart = (LinearLayout) findViewById(R.id.lnAddToCart);
 
@@ -113,7 +111,6 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
                     R.anim.slide_up_in);
             lnDetail.setVisibility(View.VISIBLE);
             lnDetail.startAnimation(animSide);
-            lnImage.setVisibility(View.GONE);
 
             txtDetail.setText(desProduct.getThongTinChiTiet());
 
@@ -122,23 +119,20 @@ public class ProductDetails extends AppCompatActivity implements View.OnClickLis
                     R.anim.slide_up_in);
             lnAddToCart.setVisibility(View.VISIBLE);
             lnAddToCart.startAnimation(animSide);
-            lnImage.setVisibility(View.GONE);
 
             txtAddToCart.setText(desProduct.getFullSize());
 
         } else if (v == btnCloseDetail) {
             animSide = AnimationUtils.loadAnimation(getApplicationContext(),
-                    R.anim.slide_up_out);
+                    R.anim.slide_out_down);
             lnDetail.startAnimation(animSide);
             lnDetail.setVisibility(View.GONE);
-            lnImage.setVisibility(View.VISIBLE);
 
         } else if (v == btnCloseAddToCart) {
             animSide = AnimationUtils.loadAnimation(getApplicationContext(),
-                    R.anim.slide_up_out);
+                    R.anim.slide_out_down);
             lnAddToCart.startAnimation(animSide);
             lnAddToCart.setVisibility(View.GONE);
-            lnImage.setVisibility(View.VISIBLE);
         }
     }
 }

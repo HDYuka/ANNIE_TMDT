@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/rounded_corners_backgroup"
+                    android:background="@color/cardview_shadow_start_color"
                     android:text="Chi tiết" />
 
                 <Button
@@ -72,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:background="#EEEEEE"
             android:visibility="gone">
 
             <Button
@@ -91,6 +92,7 @@
         // Add product to cart
 
         <LinearLayout
+            android:background="#EEEEEE"
             android:id="@+id/lnAddToCart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
